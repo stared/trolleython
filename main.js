@@ -15,12 +15,21 @@ function getFriends() {
 };
 
 function listFriends(friends) {
-  var div = d3.select("#friend-list");
-  div.selectAll(".friend")
+  var friends = d3.select("#friend-list")
+    .selectAll(".friend")
     .data(friends)
     .enter().append("div")
-      .attr("class", "friend")
-      .html(function (d) {
-        return d.name;
-      });
+      .attr("class", "friend");
+
+  friends.append("img")
+    .attr("class", "friend-face")
+    .attr("src", function (d) {
+      return d.picture.data.url;
+    });
+
+  friends.append("div")
+    .attr("class", "friend-name")
+    .html(function (d) {
+      return d.name;
+    });
 }
