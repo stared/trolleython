@@ -1,0 +1,30 @@
+div.text-choice {
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.choice {
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.choice-unknown {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.choice-unknown:hover {
+  opacity: 0.7;
+}
+
+.choice-dead {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.choice-alive {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}

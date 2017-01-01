@@ -48,26 +48,53 @@ function listFriends(friends, divId) {
     });
 }
 
-function TextChoices(divId, friends) {
+function TextChoices(divId, friends, more) {
 
   this.div = d3.select(divId);
   this.friends = friends;
+  this.more = more || 10;
 
-  var template = _.template("<%= question %> <span class='choice choice-1'><%= choice1 %></span> or <span class='choice choice-2'><%= choice2 %></span>?");
+
+  var template = _.template("<%= question %> <span class='choice choice-unknown choice-1'><%= choice1 %></span> or <span class='choice choice-unknown choice-2'><%= choice2 %></span>?<br><br>");
 
   this.choicePerson = function(person1, person2) {
-    this.div.append("div")
+
+    var that = this;
+
+    var currentChoice = this.div.append("div")
       .attr("class", "text-choice")
       .html(template({
         question: "Would you rather save",
         choice1:  person1.name,
         choice2:  person2.name
       }));
+
+    var choice1 = currentChoice.select(".choice-1");
+    var choice2 = currentChoice.select(".choice-2");
+    choice1.on("click", function () {
+      if (choice1.classed("choice-unknown")) {
+        choice1.attr("class", "choice choice-alive");
+        choice2.attr("class", "choice choice-dead");
+        that.randomTwo();
+      }
+    });
+    choice2.on("click", function () {
+      if (choice2.classed("choice-unknown")) {
+        choice2.attr("class", "choice choice-alive");
+        choice1.attr("class", "choice choice-dead");
+        that.randomTwo();
+      }
+    });
+
+
   };
 
   this.randomTwo = function() {
-    var twoPeople = _.sampleSize(this.friends, 2);
-    this.choicePerson(twoPeople[0], twoPeople[1]);
+    if (this.more > 0) {
+      var twoPeople = _.sampleSize(this.friends, 2);
+      this.choicePerson(twoPeople[0], twoPeople[1]);
+      this.more -= 1;
+    }
   }
 
 }
