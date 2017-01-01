@@ -1,6 +1,6 @@
 // Only works after `FB.init` is called
 function myFacebookLogin() {
-  FB.login(function(){}, {scope: 'user_friends'});
+  FB.login(getFriends, {scope: 'user_friends'});
 };
 
 function getFriends() {
