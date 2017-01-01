@@ -1,3 +1,5 @@
+var timeToChoose = 3;
+
 // Only works after `FB.init` is called
 function myFacebookLogin() {
   FB.login(getFriends, {scope: 'user_friends'});
@@ -55,7 +57,7 @@ function TextChoices(divId, friends, more) {
   this.more = more || 10;
 
 
-  var template = _.template("<%= question %> <span class='choice choice-unknown choice-1'><%= choice1 %></span> or <span class='choice choice-unknown choice-2'><%= choice2 %></span>?<br><br>");
+  var template = _.template("<br><%= question %> <span class='choice choice-unknown choice-1'><%= choice1 %></span> or <span class='choice choice-unknown choice-2'><%= choice2 %></span>?<br>");
 
   this.choicePerson = function(person1, person2) {
 
@@ -71,10 +73,20 @@ function TextChoices(divId, friends, more) {
 
     var choice1 = currentChoice.select(".choice-1");
     var choice2 = currentChoice.select(".choice-2");
+
+    var chooseTimeout = window.setTimeout(function () {
+      currentChoice.selectAll(".choice")
+        .attr("class", "choice choice-dead");
+      that.div.append("div")
+        .html("Too late! Now both are dead...<br>");
+      that.randomTwo();
+    }, 1000 * timeToChoose);
+
     choice1.on("click", function () {
       if (choice1.classed("choice-unknown")) {
         choice1.attr("class", "choice choice-alive");
         choice2.attr("class", "choice choice-dead");
+        window.clearTimeout(chooseTimeout);
         that.randomTwo();
       }
     });
@@ -82,6 +94,7 @@ function TextChoices(divId, friends, more) {
       if (choice2.classed("choice-unknown")) {
         choice2.attr("class", "choice choice-alive");
         choice1.attr("class", "choice choice-dead");
+        window.clearTimeout(chooseTimeout);
         that.randomTwo();
       }
     });
@@ -101,7 +114,7 @@ function TextChoices(divId, friends, more) {
 
   this.endNote = function() {
     this.div.append("div")
-      .html("You've made your choices. Now try carrying them for the rest of your life... ");
+      .html("<br>You've made your choices. Now try carrying them for the rest of your life... ");
   };
 
 }
