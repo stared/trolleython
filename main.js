@@ -94,7 +94,14 @@ function TextChoices(divId, friends, more) {
       var twoPeople = _.sampleSize(this.friends, 2);
       this.choicePerson(twoPeople[0], twoPeople[1]);
       this.more -= 1;
+    } else {
+      this.endNote();
     }
-  }
+  };
+
+  this.endNote = function() {
+    this.div.append("div")
+      .html("You've made your choices. Now try carrying them for the rest of your life... ");
+  };
 
 }
