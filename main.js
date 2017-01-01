@@ -4,7 +4,8 @@ function myFacebookLogin() {
 };
 
 function getFriends() {
-  FB.api('/me/friends', function(response) {
+  FB.api('/me/friends?fields=picture,name,first_name,last_name', function(response) {
+    console.log(response);
     if (response.data) {
       listFriends(response.data, "#friend-list-users");
     } else {
@@ -12,7 +13,7 @@ function getFriends() {
       console.log(response);
     }
   });
-  FB.api('/me/invitable_friends', function(response) {
+  FB.api('/me/invitable_friends?fields=picture,name,first_name,last_name', function(response) {
     if (response.data) {
       listFriends(response.data, "#friend-list-invitable");
     } else {
