@@ -1,5 +1,6 @@
 var timeToChoose = 3;
 
+
 // Only works after `FB.init` is called
 function myFacebookLogin() {
   FB.login(getFriends, {scope: 'user_friends'});
@@ -21,8 +22,11 @@ function getFriends() {
     if (response.data) {
       // listFriends(response.data, "#friend-list-invitable");
       friends = response.data;
-      var textChoices = new TextChoices("#text-choices", friends);
-      textChoices.randomTwo();
+      // var textChoices = new TextChoices("#text-choices", friends);
+      // textChoices.randomTwo();
+      var trolleyChoices = new TrolleyChoices("#game", friends);
+      trolleyChoices.init();
+      trolleyChoices.randomTwo();
     } else {
       console.log("No invitable_friends response.");
       console.log(response);
@@ -116,5 +120,77 @@ function TextChoices(divId, friends, more) {
     this.div.append("div")
       .html("<br>You've made your choices. Now try carrying them for the rest of your life... ");
   };
+
+}
+
+function TrolleyChoices(svgId, friends) {
+
+  this.svg = d3.select(svgId);
+  this.friends = friends;
+
+  this.init = function() {
+    this.svg.append("image")
+      .attr("xlink:href", "img/all_1v1.png");
+
+    this.svg.append("text")
+      .attr("class", "question")
+      .attr("x", 470)
+      .attr("y", 50)
+      .text("Whom do you love more?");
+
+    this.choiceUp = this.svg.append("g")
+      .attr("transform", "translate(640, 90)");
+    this.choiceDown = this.svg.append("g")
+      .attr("transform", "translate(570, 230)");
+
+    this.choiceUp.append("image")
+      .attr("class", "face-choice")
+      .attr("clip-path", "url(#circle-shape)");
+
+    this.choiceUp.append("text")
+      .attr("class", "name name-first")
+      .attr("x", 60)
+      .attr("y", 20);
+
+    this.choiceUp.append("text")
+      .attr("class", "name name-last")
+      .attr("x", 60)
+      .attr("y", 40);
+
+    this.choiceDown.append("image")
+      .attr("class", "face-choice")
+      .attr("clip-path", "url(#circle-shape)");
+
+    this.choiceDown.append("text")
+      .attr("class", "name name-first")
+      .attr("x", 60)
+      .attr("y", 20);
+
+    this.choiceDown.append("text")
+      .attr("class", "name name-last")
+      .attr("x", 60)
+      .attr("y", 40);
+  };
+
+  this.randomTwo = function() {
+    var twoPeople = _.sampleSize(this.friends, 2);
+    this.choicePerson(twoPeople[0], twoPeople[1]);
+  }
+
+  this.choicePerson = function(person1, person2) {
+    this.choiceUp.select("image")
+      .attr("xlink:href", person1.picture.data.url);
+    this.choiceUp.select(".name-first")
+      .text(person1.first_name);
+    this.choiceUp.select(".name-last")
+      .text(person1.last_name);
+
+    this.choiceDown.select("image")
+      .attr("xlink:href", person2.picture.data.url);
+    this.choiceDown.select(".name-first")
+      .text(person2.first_name);
+    this.choiceDown.select(".name-last")
+      .text(person2.last_name);
+  }
 
 }

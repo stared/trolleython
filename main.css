@@ -28,3 +28,13 @@ div.text-choice {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+
+.question {
+  font-size: 30px;
+  font-family: cursive;
+}
+
+.name {
+  font-size: 20px;
+  font-family: cursive;
+}
