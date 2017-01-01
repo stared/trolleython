@@ -1,7 +1,8 @@
 # Trolley with Friends
 
-> ...where the artist would not fear the censor; where the scientist would not be bound by petty morality...
+> ...where the artist would not fear the censor; where the scientist would not be bound by petty morality...  
 > [Bioshock](https://www.youtube.com/watch?v=J47ENHSomc8)
+
 
 > Cierpieniem cudzym żyłem i zagładą,  
 > gdy cierpieć ani ginąć sam nie mogłem  
