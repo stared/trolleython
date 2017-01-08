@@ -12,7 +12,6 @@
   <link rel="stylesheet" type="text/css" href="main.css">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
-  <script src="main.js"></script>
 </head>
 <body>
   <script>
@@ -34,7 +33,7 @@
      }(document, 'script', 'facebook-jssdk'));
   </script>
 
-   <button onclick="myFacebookLogin()">Login with Facebook and get good friends</button>
+   <button id="login-button">Login with Facebook and get good friends</button>
 
    <svg id="game" width="900" height="600">
      <defs>
@@ -46,4 +45,5 @@
 
    <div id="text-choices"></div>
 
+   <script src="main.js"></script>
 </body>

@@ -6,6 +6,8 @@ function myFacebookLogin() {
   FB.login(getFriends, {scope: 'user_friends'});
 };
 
+d3.select("#login-button").on("click", myFacebookLogin);
+
 var friends = [];
 
 function getFriends() {
