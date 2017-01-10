@@ -132,7 +132,9 @@ function TrolleyChoices(svgId, friends) {
 
   this.init = function() {
     this.svg.append("image")
-      .attr("xlink:href", "img/all_1v1.png");
+      .attr("xlink:href", "img/all_1v1.png")
+      .attr("height", 420)
+      .attr("width", 800);
 
     this.svg.append("text")
       .attr("class", "question")
@@ -147,7 +149,9 @@ function TrolleyChoices(svgId, friends) {
 
     this.choiceUp.append("image")
       .attr("class", "face-choice")
-      .attr("clip-path", "url(#circle-shape)");
+      .attr("clip-path", "url(#circle-shape)")
+      .attr("height", 50)
+      .attr("width", 50);
 
     this.choiceUp.append("text")
       .attr("class", "name name-first")
@@ -158,10 +162,18 @@ function TrolleyChoices(svgId, friends) {
       .attr("class", "name name-last")
       .attr("x", 60)
       .attr("y", 40);
+    this.choiceUp.append("rect")
+      .attr("class", "clickbox")
+      .attr("x", -40)
+      .attr("height", 120)
+      .attr("width", 220)
+      .attr("onclick","alert('now the second one is dead')");
 
     this.choiceDown.append("image")
       .attr("class", "face-choice")
-      .attr("clip-path", "url(#circle-shape)");
+      .attr("clip-path", "url(#circle-shape)")
+      .attr("height", 50)
+      .attr("width", 50);
 
     this.choiceDown.append("text")
       .attr("class", "name name-first")
@@ -172,6 +184,13 @@ function TrolleyChoices(svgId, friends) {
       .attr("class", "name name-last")
       .attr("x", 60)
       .attr("y", 40);
+
+    this.choiceDown.append("rect")
+      .attr("class", "clickbox")
+      .attr("x", -50)
+      .attr("height", 120)
+      .attr("width", 240)
+      .attr("onclick","alert('now the first one is dead')");
   };
 
   this.randomTwo = function() {
