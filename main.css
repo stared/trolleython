@@ -38,3 +38,10 @@ div.text-choice {
   font-size: 20px;
   font-family: cursive;
 }
+
+.clickbox {
+  fill-opacity: 0.0;
+  fill: red;
+/*  stroke: red; */
+  cursor: pointer;
+}
